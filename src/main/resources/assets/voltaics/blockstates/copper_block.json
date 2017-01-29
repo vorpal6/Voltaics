@@ -1,0 +1,5 @@
+{
+    "variants":{
+        "normal":  { "model": "voltaics:copper_block" }
+    }
+}

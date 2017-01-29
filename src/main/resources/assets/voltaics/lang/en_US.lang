@@ -1,0 +1,6 @@
+itemGroup.voltaics=Voltaics
+
+item.copper_ingot.name=Copper Ingot
+item.copper_nugget.name=Copper Nugget
+
+tile.copper_block.name=Block of Copper
