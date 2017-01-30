@@ -2,5 +2,10 @@ itemGroup.voltaics=Voltaics
 
 item.copper_ingot.name=Copper Ingot
 item.copper_nugget.name=Copper Nugget
+item.steel_ingot.name=Steel Ingot
+item.steel_nugget.name=Steel Nugget
 
 tile.copper_block.name=Block of Copper
+tile.steel_block.name=Block of Steel
+tile.kiln_brick.name=Kiln Brick
+tile.blast_furnace.name=Blast Furnace

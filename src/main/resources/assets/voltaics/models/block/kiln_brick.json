@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "voltaics:blocks/kiln_brick",
+        "particle": "voltaics:blocks/kiln_brick"
+    }
+}

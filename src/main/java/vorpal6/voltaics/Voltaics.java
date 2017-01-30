@@ -23,10 +23,10 @@ public class Voltaics
     public static final String MODID = "voltaics";
     public static final String VERSION = "0.1";
 
-    @SidedProxy(clientSide = "electrodev.voltaics.proxy.ClientProxy", serverSide = "electrodev.voltaics.proxy.ServerProxy")
+    @SidedProxy(clientSide = "vorpal6.voltaics.proxy.ClientProxy", serverSide = "vorpal6.voltaics.proxy.ServerProxy")
     public static CommonProxy proxy;
     
-    @Instance("roots")
+    @Instance("voltaics")
     public static Voltaics instance;
     
     public static CreativeTabs tab = new CreativeTabs("voltaics") {
