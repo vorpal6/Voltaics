@@ -20,5 +20,5 @@ public class GuiBlastFurnace extends GuiContainer {
 	    this.mc.getTextureManager().bindTexture(new ResourceLocation("voltaics:textures/gui/blast_furnace_gui.png"));
 	    this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 	}
-
 }
+

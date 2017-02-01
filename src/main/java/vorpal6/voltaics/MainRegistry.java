@@ -20,9 +20,11 @@ public class MainRegistry {
 	public static ArrayList<Block> blocks = new ArrayList<Block>();
 	
 	public static Item copper_ingot, copper_nugget,
+					   tin_ingot, tin_nugget,
 					   steel_ingot, steel_nugget;
-	
+
 	public static Block copper_block,
+						tin_block,
 						steel_block,
 						kiln_brick,
 						blast_furnace;
@@ -30,10 +32,13 @@ public class MainRegistry {
 	public static void init(){
 		items.add(copper_ingot = new VoltaicsItem("copper_ingot",true));
 		items.add(copper_nugget = new VoltaicsItem("copper_nugget",true));
+		items.add(tin_ingot = new VoltaicsItem("tin_ingot",true));
+		items.add(tin_nugget = new VoltaicsItem("tin_nugget",true));
 		items.add(steel_ingot = new VoltaicsItem("steel_ingot",true));
 		items.add(steel_nugget = new VoltaicsItem("steel_nugget",true));
 
 		blocks.add(copper_block = (new VoltaicsBlock(Material.IRON,"copper_block",true).setHardness(1.4f)));
+		blocks.add(tin_block = (new VoltaicsBlock(Material.IRON,"tin_block",true).setHardness(1.4f)));
 		blocks.add(steel_block = (new VoltaicsBlock(Material.IRON,"steel_block",true).setHardness(1.8f)));
 		blocks.add(kiln_brick = (new VoltaicsBlock(Material.ROCK,"kiln_brick",true).setHardness(1.2f)));
 		blocks.add(blast_furnace = (new BlockBlastFurnace(Material.ROCK,"blast_furnace",true).setHardness(1.2f)));
