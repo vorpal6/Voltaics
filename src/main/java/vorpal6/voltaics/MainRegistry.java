@@ -9,10 +9,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vorpal6.voltaics.block.BlockBlastFurnace;
+import vorpal6.voltaics.block.BlockPowerTester;
 import vorpal6.voltaics.block.IModeledBlock;
 import vorpal6.voltaics.block.VoltaicsBlock;
 import vorpal6.voltaics.item.IModeledItem;
 import vorpal6.voltaics.item.VoltaicsItem;
+import vorpal6.voltaics.tile.TileEntityPowerTester;
 import vorpal6.voltaics.tile.blast_furnace.TileEntityBlastFurnace;
 
 public class MainRegistry {
@@ -28,6 +30,8 @@ public class MainRegistry {
 						steel_block,
 						kiln_brick,
 						blast_furnace;
+
+	public static Block power_tester; //Temporary
 	
 	public static void init(){
 		items.add(copper_ingot = new VoltaicsItem("copper_ingot",true));
@@ -42,8 +46,12 @@ public class MainRegistry {
 		blocks.add(steel_block = (new VoltaicsBlock(Material.IRON,"steel_block",true).setHardness(1.8f)));
 		blocks.add(kiln_brick = (new VoltaicsBlock(Material.ROCK,"kiln_brick",true).setHardness(1.2f)));
 		blocks.add(blast_furnace = (new BlockBlastFurnace(Material.ROCK,"blast_furnace",true).setHardness(1.2f)));
+
+		blocks.add(power_tester = new BlockPowerTester(Material.CACTUS, "power_tester", true).setHardness(1.2f));
 		
 		GameRegistry.registerTileEntity(TileEntityBlastFurnace.class, Voltaics.MODID+":blast_furnace");
+
+		GameRegistry.registerTileEntity(TileEntityPowerTester.class, Voltaics.MODID+":power_tester");
 	}
 	
 	@SideOnly(Side.CLIENT)

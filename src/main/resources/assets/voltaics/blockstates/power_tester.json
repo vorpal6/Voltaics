@@ -1,0 +1,6 @@
+{
+    "variants":{
+        "on=false":  { "model": "voltaics:power_tester_off" },
+        "on=true":  { "model": "voltaics:power_tester_on" }
+    }
+}

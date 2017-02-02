@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "voltaics:blocks/power_tester_off",
+        "particle": "voltaics:blocks/power_tester_off"
+    }
+}
