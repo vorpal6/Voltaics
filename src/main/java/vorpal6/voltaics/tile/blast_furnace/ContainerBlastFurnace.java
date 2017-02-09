@@ -18,18 +18,31 @@ public class ContainerBlastFurnace extends Container {
 		return false;
 	}
 	
+	public class SlotBlastFurnace extends Slot {
+
+		public SlotBlastFurnace(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+			super(inventoryIn, index, xPosition, yPosition);
+		}
+		
+		@Override
+		public boolean isItemValid(ItemStack stack){
+			return inventory.isItemValidForSlot(this.slotNumber, stack);
+		}
+		
+	}
+	
 	public ContainerBlastFurnace(IInventory playerInv, TileEntityBlastFurnace te) {
 	    this.tile = te;
 
-	    this.addSlotToContainer(new Slot(tile, 0, 30, 41));
-	    this.addSlotToContainer(new Slot(tile, 1, 65, 19));
-	    this.addSlotToContainer(new Slot(tile, 2, 65, 49));
-	    this.addSlotToContainer(new Slot(tile, 3, 125, 20));
-	    this.addSlotToContainer(new Slot(tile, 4, 125, 50));
+	    this.addSlotToContainer(new SlotBlastFurnace(tile, 0, 30, 41));
+	    this.addSlotToContainer(new SlotBlastFurnace(tile, 1, 65, 19));
+	    this.addSlotToContainer(new SlotBlastFurnace(tile, 2, 65, 49));
+	    this.addSlotToContainer(new SlotBlastFurnace(tile, 3, 125, 20));
+	    this.addSlotToContainer(new SlotBlastFurnace(tile, 4, 125, 50));
 
 	    for (int y = 0; y < 3; ++y) {
 	        for (int x = 0; x < 9; ++x) {
-	            this.addSlotToContainer(new Slot(playerInv, x + y * 9, 8 + x * 18, 84 + y * 18));
+	            this.addSlotToContainer(new Slot(playerInv, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
 	        }
 	    }
 
@@ -38,76 +51,40 @@ public class ContainerBlastFurnace extends Container {
 	    }
 	}
 	
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
-    {
+	@Override
+    public ItemStack transferStackInSlot(EntityPlayer p, int i){
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.inventorySlots.get(index);
-
-        if (slot != null && slot.getHasStack())
-        {
+        Slot slot = (Slot) inventorySlots.get(i);
+        if (slot != null && slot.getHasStack()){
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
-
-            if (index == 2)
-            {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
-                {
-                    return ItemStack.EMPTY;
-                }
-
-                slot.onSlotChange(itemstack1, itemstack);
+                
+            if (i < 5){
+            	if (!mergeItemStack(itemstack1, 5, inventorySlots.size(), true) && tile.isItemValidForSlot(i, itemstack1)){
+            		return ItemStack.EMPTY;
+            	}
             }
-            else if (index != 1 && index != 0)
-            {
-                if (!FurnaceRecipes.instance().getSmeltingResult(itemstack1).isEmpty())
-                {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else if (TileEntityFurnace.isItemFuel(itemstack1))
-                {
-                    if (!this.mergeItemStack(itemstack1, 1, 2, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else if (index >= 3 && index < 30)
-                {
-                    if (!this.mergeItemStack(itemstack1, 30, 39, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else if (index >= 30 && index < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
-                {
-                    return ItemStack.EMPTY;
-                }
+            else {
+            	boolean isAllowed = false;
+            	for (int j = 0; j < tile.slotCount; j ++){
+            		if (tile.isItemValidForSlot(j, itemstack1)){
+            			isAllowed = true;
+            		}
+            	}
+            	if (!isAllowed){
+            		return ItemStack.EMPTY;
+            	}
+                else if (!mergeItemStack(itemstack1, 0, 5, false) && tile.isItemValidForSlot(i, itemstack1)){
+            		return ItemStack.EMPTY;
+            	}
             }
-            else if (!this.mergeItemStack(itemstack1, 3, 39, false))
-            {
-                return ItemStack.EMPTY;
-            }
-
-            if (itemstack1.isEmpty())
-            {
+            if (itemstack1.getCount() == 0){
                 slot.putStack(ItemStack.EMPTY);
             }
-            else
-            {
-                slot.onSlotChanged();
+            else {
+            	slot.onSlotChanged();
             }
-
-            if (itemstack1.getCount() == itemstack.getCount())
-            {
-                return ItemStack.EMPTY;
-            }
-
-            slot.onTake(playerIn, itemstack1);
         }
-
         return itemstack;
     }
-
 }

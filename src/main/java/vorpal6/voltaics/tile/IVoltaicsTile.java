@@ -12,4 +12,10 @@ public interface IVoltaicsTile {
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ);
 
 	public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player);
+	
+	public void markForUpdate();
+	
+	public boolean needsUpdate();
+	
+	public void clean();
 }

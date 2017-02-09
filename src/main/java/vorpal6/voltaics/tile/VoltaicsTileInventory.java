@@ -22,18 +22,22 @@ import net.minecraftforge.oredict.OreDictionary;
 public class VoltaicsTileInventory extends TileEntity implements IVoltaicsTile, IInventory {
 	public int slotCount = 0;
 	public ItemStackHandler inventory;
+	public boolean needsUpdate = false;
 	
 	public VoltaicsTileInventory(int slotCount){
 		this.slotCount = slotCount;
-		inventory = new ItemStackHandler(5){
+		inventory = new ItemStackHandler(slotCount){
 	        @Override
 	        protected void onContentsChanged(int slot) {
 	        	markDirty();
-	        	/*if (!world.isRemote){
-	        		PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(TileEntityMortar.this));
-	        	}*/
 	        }
 		};
+	}
+	
+	@Override
+	public void markDirty(){
+		super.markDirty();
+		markForUpdate();
 	}
 	
 	@Override
@@ -94,7 +98,7 @@ public class VoltaicsTileInventory extends TileEntity implements IVoltaicsTile, 
 
 	@Override
 	public int getSizeInventory() {
-		return 5;
+		return slotCount;
 	}
 
 	@Override
@@ -114,9 +118,7 @@ public class VoltaicsTileInventory extends TileEntity implements IVoltaicsTile, 
 
 	@Override
 	public ItemStack decrStackSize(int index, int count) {
-		ItemStack toReturn = inventory.getStackInSlot(index).copy();
-		toReturn.setCount(count);
-		inventory.getStackInSlot(index).shrink(count);
+		ItemStack toReturn = inventory.extractItem(index, count, false);
 		markDirty();
 		return toReturn;
 	}
@@ -181,6 +183,21 @@ public class VoltaicsTileInventory extends TileEntity implements IVoltaicsTile, 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		return true;
+	}
+
+	@Override
+	public void markForUpdate() {
+		this.needsUpdate = true;
+	}
+
+	@Override
+	public void clean() {
+		this.needsUpdate = false;
+	}
+	
+	@Override
+	public boolean needsUpdate(){
+		return needsUpdate;
 	}
 
 }
