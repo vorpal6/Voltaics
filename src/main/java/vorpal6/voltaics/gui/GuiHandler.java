@@ -17,7 +17,7 @@ public class GuiHandler implements IGuiHandler {
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		switch (ID){
 			case 0: {
-				return new GuiBlastFurnace(new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) world.getTileEntity(new BlockPos(x, y, z))));
+				return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) world.getTileEntity(new BlockPos(x, y, z)));
 			}
 			case 1: {
 				return new GuiBasic(player.inventory, new InventoryBasic("inventory.basic", false, 9), 9);

@@ -46,6 +46,7 @@ public class Voltaics
     public void preInit(FMLPreInitializationEvent event){
         ConfigManager.init(event.getSuggestedConfigurationFile());
         MinecraftForge.EVENT_BUS.register(new ConfigManager());
+        MinecraftForge.EVENT_BUS.register(new EventManager());
     	proxy.preInit(event);
     }
     

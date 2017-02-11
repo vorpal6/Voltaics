@@ -44,26 +44,14 @@ public class TileEntityBlastFurnace extends VoltaicsTileInventory implements IVo
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		switch(index){
-		case 0: {return TileEntityFurnace.isItemFuel(stack);}
+		case 0: {
+			return TileEntityFurnace.isItemFuel(stack);
+		}
 		case 1: {
-			int[] oreNames = OreDictionary.getOreIDs(stack);
-			for (int i = 0; i < oreNames.length; i ++){
-				if (OreDictionary.getOreName(oreNames[i]).substring(0, 3).compareTo("ore") == 0
-			|| OreDictionary.getOreName(oreNames[i]).substring(0, 5).compareTo("ingot") == 0){
-					return true;
-				}
-			}
-			return false;
+			return true;
 		}
 		case 2: {
-			int[] oreNames = OreDictionary.getOreIDs(stack);
-			for (int i = 0; i < oreNames.length; i ++){
-				if (OreDictionary.getOreName(oreNames[i]).substring(0, 3).compareTo("ore") == 0
-			|| OreDictionary.getOreName(oreNames[i]).substring(0, 5).compareTo("ingot") == 0){
-					return true;
-				}
-			}
-			return false;
+			return true;
 		}
 		case 3: {return false;}
 		case 4: {return false;}

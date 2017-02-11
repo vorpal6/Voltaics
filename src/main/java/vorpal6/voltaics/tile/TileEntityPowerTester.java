@@ -12,7 +12,7 @@ import vorpal6.voltaics.Voltaics;
 import vorpal6.voltaics.power.IPowered;
 
 public class TileEntityPowerTester extends TileEntity implements IVoltaicsTile, IPowered{
-
+	
     public TileEntityPowerTester(){
         super();
     }
@@ -37,4 +37,21 @@ public class TileEntityPowerTester extends TileEntity implements IVoltaicsTile, 
     public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
 
     }
+
+	@Override
+	public void markForUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void clean(){
+		
+	}
+
+	@Override
+	public boolean needsUpdate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
